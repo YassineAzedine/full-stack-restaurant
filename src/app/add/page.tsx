@@ -87,7 +87,7 @@ const AddPage = () => {
         method: "POST",
         body: JSON.stringify({
           img: url,
-          ...inputs,
+          ...inputs,  
           options,
         }),
       });

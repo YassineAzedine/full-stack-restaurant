@@ -6,7 +6,7 @@ const getData = async ()=>{
   const res = await fetch("http://localhost:3000/api/products",{
     cache:"no-store"
   })
-
+   console.log(res)
   if(!res.ok){
     throw new Error("Failed!");
   }
@@ -16,7 +16,10 @@ const getData = async ()=>{
 
 const Featured = async () => {
 
-  const featuredProducts:ProductType[] = await getData()
+   const featuredProducts:ProductType[] = await getData()
+  //  const featuredProducts:ProductType[] = [
+
+  //  ]
 
   return (
     <div className="w-screen overflow-x-scroll text-red-500">
