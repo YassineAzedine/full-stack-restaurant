@@ -2,38 +2,54 @@ import { ProductType } from "@/types/types";
 import Image from "next/image";
 import React from "react";
 
-const getData = async ()=>{
-  const res = await fetch("http://localhost:3000/api/products",{
-    cache:"no-store"
-  })
-   console.log(res)
-  if(!res.ok){
-    throw new Error("Failed!");
-  }
+const getData = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products`, {
+      cache: "no-store",
+    });
 
-  return res.json()
-}
+    console.log(res); // Log the response for debugging
+    
+    // Check if the response is successful (status code 200-299)
+    if (!res.ok) {
+      // Optionally, get more details from the response (if it's a JSON error response)
+      const errorDetails = await res.json();
+      throw new Error(
+        `Failed to fetch data: ${errorDetails.message || 'Unknown error'} (Status: ${res.status})`
+      );
+    }
+
+    // Return the parsed JSON from the response
+    return res.json();
+  } catch (error) {
+    console.error("Error occurred during fetch:", error);
+    // Here you can handle the error (you can set an error state or notify the user)
+    return null; // Or return a fallback value (e.g., empty array or error message)
+  }
+};
+
+
 
 const Featured = async () => {
 
-   const featuredProducts:ProductType[] = await getData()
+  const featuredProducts:ProductType[] = await getData()
   //  const featuredProducts:ProductType[] = [
 
   //  ]
 
   return (
-    <div className="w-screen overflow-x-scroll text-red-500">
+    <div className="w-screen overflow-x-scroll text-red-500 m-4 p-2">
       {/* WRAPPER */}
       <div className="w-max flex">
         {/* SINGLE ITEM */}
-        {featuredProducts.map((item) => (
+        {featuredProducts && featuredProducts.map((item) => (
           <div
             key={item.id}
             className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh]"
           >
             {/* IMAGE CONTAINER */}
             {item.img && (
-              <div className="relative flex-1 w-full hover:rotate-[60deg] transition-all duration-500">
+              <div className="relative flex-1 w-full transition-all duration-500">
                 <Image src={item.img} alt="" fill className="object-contain" />
               </div>
             )}
