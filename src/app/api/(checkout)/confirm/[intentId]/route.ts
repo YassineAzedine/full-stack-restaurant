@@ -1,8 +1,9 @@
 import { prisma } from "@/utils/connect";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const PUT = async ({ params }: { params: { intentId: string } }) => {
-  const { intentId } = params;
+export const PUT = async (req: NextRequest) => {
+  // On récupère `intentId` de l'URL à partir de `req.nextUrl`
+  const intentId = req.nextUrl.pathname.split("/")[4]; // Assure-toi que l'index est correct
 
   try {
     await prisma.order.update({
