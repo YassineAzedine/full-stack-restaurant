@@ -5,15 +5,21 @@ import Image from "next/image";
 import React from "react";
 
 const getData = async (id: string) => {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/${id}`, {
-    cache: "no-store",
-  });
+  try{
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/${id}`, {
+      cache: "no-store",
+    });
+  
+    if (!res.ok) {
+      throw new Error("Failed!");
+    }
+  
+    return res.json();
+  }catch(err){
+    console.log(err)    
 
-  if (!res.ok) {
-    throw new Error("Failed!");
   }
-
-  return res.json();
+  
 };
 
 const SingleProductPage = async ({ params }: { params: { id: string } }) => {
