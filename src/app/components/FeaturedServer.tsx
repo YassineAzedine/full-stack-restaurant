@@ -34,9 +34,17 @@ const getData = async () => {
 
 const FeaturedServer = async () => {
 
-  const featuredProducts:ProductType[] = await getData()
+  const featuredProducts: ProductType[] | null = await getData();
 
-  return <Featured featuredProducts={featuredProducts} />
+  if (!featuredProducts || featuredProducts.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-[90vh] text-red-500">
+        Aucun produit en vedette disponible.
+      </div>
+    );
+  }
+
+  return <Featured featuredProducts={featuredProducts} />;
 
 };
 

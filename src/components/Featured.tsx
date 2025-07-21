@@ -13,6 +13,7 @@ type FeaturedClientProps = {
 };
 
 const Featured = ({ featuredProducts }: FeaturedClientProps) => {
+  
   const { addToCart } = useCartStore();
   const [index, setIndex] = useState(0);
 
