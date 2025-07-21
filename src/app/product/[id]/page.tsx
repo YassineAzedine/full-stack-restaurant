@@ -13,8 +13,11 @@ const getData = async (id: string) => {
     if (!res.ok) {
       throw new Error("Failed!");
     }
-  
-    return res.json();
+
+    
+
+     
+     return res.json();
   }catch(err){
     console.log(err)    
 
@@ -24,30 +27,37 @@ const getData = async (id: string) => {
 
 const SingleProductPage = async ({ params }: { params: { id: string } }) => {
   const singleProduct: ProductType = await getData(params.id);
+  
+  
 
   return (
-    <div className="p-4 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-red-500 md:flex-row md:gap-8 md:items-center relative">
-      {/* IMAGE CONTAINER */}
-      {singleProduct.img && (
-        <div className="relative w-full h-1/2 md:h-[70%]">
-          <Image
-            src={singleProduct.img}
-            alt=""
-            className="object-contain"
-            fill
-          />
-        </div>
-      )}
-      {/* TEXT CONTAINER */}
-      <div className="h-1/2 flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8">
-        <h1 className="text-3xl font-bold uppercase">
-          <span>{singleProduct.title}</span>
-          <DeleteButton id={singleProduct.id} />
-        </h1>
-        <p>{singleProduct.desc}</p>
-        <Price product={singleProduct} />
-      </div>
+   <div className="p-6 lg:px-20 xl:px-40 min-h-screen flex flex-col md:flex-row md:gap-12 md:items-center text-red-500 bg-white">
+  {/* IMAGE CONTAINER */}
+  {singleProduct.img && (
+    <div className="relative w-full md:w-1/2 h-64 sm:h-96 md:h-[70vh] rounded-lg shadow-lg overflow-hidden bg-gradient-to-tr from-gray-50 to-gray-100">
+      <Image
+        src={singleProduct.img}
+        alt={singleProduct.title}
+        fill
+        className="object-contain transition-transform duration-500 hover:scale-105"
+        priority
+      />
     </div>
+  )}
+
+  {/* TEXT CONTAINER */}
+  <div className="flex flex-col flex-1 mt-8 md:mt-0 gap-6 md:justify-center relative">
+    <h1 className="text-4xl font-extrabold uppercase tracking-wide flex items-center justify-between gap-4">
+      <span>{singleProduct.title}</span>
+      <DeleteButton id={singleProduct.id} />
+    </h1>
+    <p className="text-base md:text-lg leading-relaxed max-w-xl opacity-90">{singleProduct.desc}</p>
+    <div className="inline-block bg-red-50 rounded-lg p-4 w-max shadow-md">
+      <Price product={singleProduct} />
+    </div>
+  </div>
+</div>
+
   );
 };
 

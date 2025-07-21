@@ -63,7 +63,7 @@ CREATE TABLE "Product" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "title" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
+    "desc" TEXT NOT NULL,
     "img" TEXT,
     "price" DECIMAL(65,30) NOT NULL,
     "isFeatured" BOOLEAN NOT NULL DEFAULT false,

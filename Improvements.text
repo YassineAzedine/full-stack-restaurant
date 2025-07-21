@@ -1,0 +1,63 @@
+//slider
+✅ Improvements:
+Smooth image transition (fade-in/fade-out) using Framer Motion.
+
+Responsive & aesthetic layout with improved text styling.
+
+Interactive CTA button with animation.
+
+Dot navigation to indicate active slide (optional but professional).
+//Featured
+✅  Improvements:
+Remove horizontal scrolling (overflow-x-scroll → no longer needed).
+
+Use responsive grid or flex wrap layout.
+
+Ensure proper responsiveness across devices.
+    
+Keep animations, cart handler, and dark mode support.
+
+
+SingleProductPage
+
+Separated data fetching into Server Component and UI into Client Component to follow Next.js 13 best practices.
+
+Enhanced layout with responsive two-column design.
+
+Added image hover zoom, shadows, and rounded corners for visual appeal.
+
+Improved typography hierarchy and spacing for readability.
+
+Sticky Delete button on desktop for better UX.
+
+Added loading and error states for robustness.
+
+MenuPage
+
+Converted to client fetching with proper loading and error handling states.
+
+Used CSS grid for responsive layout and gap management.
+
+Added overlay on images for better text readability.
+
+Styled “Explore” buttons with conditional coloring for accessibility and consistency.
+
+LoginPage
+
+Added client-side redirect logic inside useEffect to avoid render-blocking navigation errors.
+
+Improved visual hierarchy with bold headings and clear messaging.
+
+Social login buttons enhanced with hover, focus states, and accessible ARIA labels.
+
+Clean layout with consistent spacing and background contrast for accessibility.
+
+General UI/UX
+
+Used Tailwind CSS utilities for consistent spacing, responsive design, and hover/focus states.
+
+Improved accessibility by adding ARIA labels and keyboard-friendly focus styles.
+
+Added subtle animations and transitions for smoother user interactions.
+
+Optimized images with priority loading and proper alt texts.

@@ -1,5 +1,6 @@
 "use client";
 
+import { log } from "console";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -67,22 +68,28 @@ const AddPage = () => {
     const data = new FormData();
     data.append("file", file!);
     data.append("upload_preset", "restaurant");
-
-    const res = await fetch("https://api.cloudinary.com/v1_1/lamadev/image", {
+    console.log(data);
+    const res = await fetch(`${process.env.URL_ClOUDINARY}`, {
       method: "POST",
-      headers: { "Content-Type": "multipart/form-data" },
-      body: data,
+      body: data, // Ne pas définir headers ici
     });
 
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`Upload failed: ${res.status} - ${errorText}`);
+    }
+  
     const resData = await res.json();
-    return resData.url;
+    return resData.secure_url; // Préfère secure_url
   };
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       const url = await upload();
+console.log(">>>>>>>");
+      
       const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products`, {
         method: "POST",
         body: JSON.stringify({
@@ -91,6 +98,7 @@ const AddPage = () => {
           options,
         }),
       });
+      console.log("res", res);
 
       const data = await res.json();
 
@@ -100,6 +108,8 @@ const AddPage = () => {
     }
   };
 
+  console.log(process.env.URL_ClOUDINARY);
+  
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center text-red-500">
       <form onSubmit={handleSubmit} className="flex flex-wrap gap-6">
@@ -166,8 +176,8 @@ const AddPage = () => {
           <div className="flex">
             <input
               className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
-              type="text"
               placeholder="Title"
+              type="text"
               name="title"
               onChange={changeOption}
             />

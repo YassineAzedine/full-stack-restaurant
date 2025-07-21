@@ -1,13 +1,16 @@
 import { ProductType } from "@/types/types";
+import { log } from "console";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const getData = async (category:string)=>{
+  
+
   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products?cat=${category}`,{
     cache:"no-store"
   })
-
+  // console.log(await res.json()); 
   if(!res.ok){
     throw new Error("Failed!");
     

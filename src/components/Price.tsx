@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Price = ({ product }: { product: ProductType }) => {
+  console.log(product);
+  
   const [total, setTotal] = useState(product.price);
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
@@ -45,6 +47,7 @@ const Price = ({ product }: { product: ProductType }) => {
       <div className="flex gap-4">
         {product.options?.length &&
           product.options?.map((option, index) => (
+            
             <button
               key={option.title}
               className="min-w-[6rem] p-2 ring-1 ring-red-400 rounded-md"
@@ -54,7 +57,7 @@ const Price = ({ product }: { product: ProductType }) => {
               }}
               onClick={() => setSelected(index)}
             >
-              {option.title}
+              {/* {option?.size} */}
             </button>
           ))}
       </div>
