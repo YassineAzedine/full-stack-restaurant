@@ -21,10 +21,12 @@ const CartPage = () => {
       router.push("/login");
       return;
     }
+ 
+    
 
     setLoadingCheckout(true);
     try {
-      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/orders`, {
+      const res = await fetch(`/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -34,8 +36,10 @@ const CartPage = () => {
           userEmail: session.user.email,
         }),
       });
+      console.log("Checkout response:", res);
       if (!res.ok) throw new Error("Failed to create order");
       const data = await res.json();
+
       router.push(`/pay/${data.id}`);
     } catch (err) {
       console.error(err);
