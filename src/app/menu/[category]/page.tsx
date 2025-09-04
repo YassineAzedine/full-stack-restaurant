@@ -3,21 +3,22 @@ import { log } from "console";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import {pizzas} from "@/data";
 
-const getData = async (category:string)=>{
+// const getData = async (category:string)=>{
   
 
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products?cat=${category}`,{
-    cache:"no-store"
-  })
-  // console.log(await res.json()); 
-  if(!res.ok){
-    throw new Error("Failed!");
+//   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products?cat=${category}`,{
+//     cache:"no-store"
+//   })
+//   // console.log(await res.json()); 
+//   if(!res.ok){
+//     throw new Error("Failed!");
     
-  }
+//   }
 
-  return res.json()
-}
+//   return res.json()
+// }
 
 type Props = {
   params:{category:string}
@@ -25,7 +26,9 @@ type Props = {
 
 const CategoryPage = async ({params}:Props) => {
 
-  const products:ProductType[] = await getData(params.category)
+  // const products:ProductType[] = await getData(params.category)
+   const products:ProductType[] = pizzas
+
   return (
     <div className="flex flex-wrap text-red-500">
       {products.map((item) => (

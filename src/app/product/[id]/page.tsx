@@ -3,30 +3,32 @@ import Price from "@/components/Price";
 import { ProductType } from "@/types/types";
 import Image from "next/image";
 import React from "react";
-
-const getData = async (id: string) => {
-  try{
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/${id}`, {
-      cache: "no-store",
-    });
+import {singleProducts} from "@/data";
+// const getData = async (id: string) => {
+//   try{
+//     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/${id}`, {
+//       cache: "no-store",
+//     });
   
-    if (!res.ok) {
-      throw new Error("Failed!");
-    }
+//     if (!res.ok) {
+//       throw new Error("Failed!");
+//     }
 
     
 
      
-     return res.json();
-  }catch(err){
-    console.log(err)    
+//      return res.json();
+//   }catch(err){
+//     console.log(err)    
 
-  }
+//   }
   
-};
+// };
 
 const SingleProductPage = async ({ params }: { params: { id: string } }) => {
-  const singleProduct: ProductType = await getData(params.id);
+  // const singleProduct: ProductType = await getData(params.id);
+  const singleProduct: ProductType = singleProducts
+
   
   
 

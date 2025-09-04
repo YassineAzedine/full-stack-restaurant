@@ -9,7 +9,7 @@ type Product = {
 
 type Products = Product[];
 
-export const featuredProducts: Products = [
+export const featured: Products = [
   {
     id: 1,
     title: "Sicilian",
@@ -333,7 +333,7 @@ export const pizzas: Products = [
   },
 ];
 
-export const singleProduct: Product = {
+export const singleProducts: Product = {
   id: 1,
   title: "Sicilian",
   desc: "Ignite your taste buds with a fiery combination of spicy pepperoni, jalapeños, crushed red pepper flakes, and melted mozzarella cheese, delivering a kick with every bite.",
@@ -365,7 +365,7 @@ type Menu = {
   color: string;
 }[];
 
-export const menu: Menu = [
+export const menus: Menu = [
   {
     id: 1,
     slug: "pastas",

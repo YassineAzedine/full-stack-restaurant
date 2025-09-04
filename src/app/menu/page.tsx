@@ -1,30 +1,30 @@
 import { MenuType } from "@/types/types";
 import Link from "next/link";
 import React from "react";
-
-const getData = async ()=>{
-  try{
-   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/categories`,{
-     cache:"no-store"
-   })
+import {menus} from "@/data";
+// const getData = async ()=>{
+//   try{
+//    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/categories`,{
+//      cache:"no-store"
+//    })
  
-   if(!res.ok){
-     throw new Error("Failed!");
+//    if(!res.ok){
+//      throw new Error("Failed!");
      
-   }
+//    }
  
-   return res.json()
-  }catch (error){
-   console.error("Error occurred during fetch:", error);
-   // Here you can handle the error (you can set an error state or notify the user)
-   return null; //
-  }
- }
+//    return res.json()
+//   }catch (error){
+//    console.error("Error occurred during fetch:", error);
+//    // Here you can handle the error (you can set an error state or notify the user)
+//    return null; //
+//   }
+//  }
 
 const MenuPage = async () => {
 
-  const menu:MenuType = await getData()
-  // const menu:MenuType = []
+  // const menu:MenuType = await getData()
+  const menu:MenuType = menus
 
   return (
   <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col md:flex-row gap-6">
